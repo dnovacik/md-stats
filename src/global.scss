@@ -1,31 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Oxygen:400,700|Source+Sans+Pro:400,600,700|Roboto:400,600');
+
 $navbar-height:              64px;
 $navbar-background:          #fff;
 $navbar-border:              #ddd;
 
-$navbar-collapse-breakpoint: 768px;
+$navbar-collapse-breakpoint: 767px;
 
 $navbar-item-font-size:      14px;
 $navbar-item-border-width:   4px;
 $navbar-item-color:          #555;
 $navbar-item-active-color:   #333;
 $navbar-item-border:         transparent;
-$navbar-item-active-border:  #673ab7;
+$navbar-item-active-border:  #052de0;
 
 *,
 *:before,
 *:after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     background-color: #f5f5f5;
     color: #333;
     font-size: 14px;
-    font-family: Verdana, Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
 }
 
 a {
     text-decoration: none;
     transition: all 0.3s linear 0s;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media (min-width: 992px) {
+        max-width: 960px;
+    }
+}
+
+section.main {
+    display: flex;
+    position: relative;
+    overflow: hidden;
 }
