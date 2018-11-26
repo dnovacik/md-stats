@@ -230,7 +230,7 @@
       color: $navbar-item-color;
       border-bottom: $navbar-item-border-width solid $navbar-item-border;
 
-      &.active,
+      &.router-link-exact-active,
       &:hover,
       &:focus {
         color: $navbar-item-active-color;
