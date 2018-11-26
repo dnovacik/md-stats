@@ -14,6 +14,7 @@
         TileLayer
     } from 'leaflet';
     import europeStatesJson from './../data/europe-states.geo.json';
+    import geoJsonLayerStyle from './../constants/styles.js';
 
     export default {
         name: 'mapLeaflet',
@@ -21,17 +22,6 @@
             return {
                 leafletMap: null,
                 europeGeoJson: '',
-                defaultGeoStyle: {
-                    stroke: '#2262CC',
-                    weight: 0.5,
-                    fillOpacity: 0
-                },
-                hoverGeoStyle: {
-                    stroke: '#2262CC',
-                    weight: 0.5,
-                    fill: '#226200',
-                    fillOpacity: 0.5
-                },
                 defaultMapPositionSettings: {
                     center: [48, 19],
                     zoom: 4
@@ -53,14 +43,14 @@
                 if (this.europeGeoJson === '') {
                     this.europeGeoJson = L.geoJson(europeStatesJson, {
                         onEachFeature: (feature, layer) => {
-                            layer.setStyle(this.defaultGeoStyle);
+                            layer.setStyle(geoJsonLayerStyle.defaultGeoStyle);
 
                             layer.on('mouseover', () => {
-                                layer.setStyle(this.hoverGeoStyle);
+                                layer.setStyle(geoJsonLayerStyle.hoverGeoStyle);
                             });
 
                             layer.on('mouseout', () => {
-                                layer.setStyle(this.defaultGeoStyle);
+                                layer.setStyle(geoJsonLayerStyle.defaultGeoStyle);
                             });
 
                             layer.on('click', () => {
