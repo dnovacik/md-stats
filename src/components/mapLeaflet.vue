@@ -15,6 +15,7 @@
     } from 'leaflet';
     import europeStatesJson from './../data/europe-states.geo.json';
     import geoJsonLayerStyle from './../constants/styles.js';
+    import slovakiaRegionsJson from './../data/sk_regions.geo.json'
 
     export default {
         name: 'mapLeaflet',
@@ -60,7 +61,8 @@
                                     this.isCentered = false;
 
                                     if (this.leafletMap.hasLayer(this.europeGeoJson)) {
-                                        this.removeAllLayersExceptClickedOne(layer, this.europeGeoJson);
+                                        this.removeAllLayers();
+                                        this.loadGeoJsonRegions(feature.properties.admin);
                                     }
                                 }
                             });
@@ -68,14 +70,36 @@
                     });
                 }
             },
-            removeAllLayersExceptClickedOne(layer, layers) {
+            loadGeoJsonRegions(stateLocale) {
+                if (stateLocale === 'Slovakia') {
+                    this.europeStateGeoJson = L.geoJSON(slovakiaRegionsJson, {
+                        onEachFeature: (feature, layer) => {
+                            layer.setStyle(geoJsonLayerStyle.defaultGeoStyle);
+
+                            layer.on('mouseover', () => {
+                                layer.setStyle(geoJsonLayerStyle.hoverGeoStyle);
+                            });
+
+                            layer.on('mouseout', () => {
+                                layer.setStyle(geoJsonLayerStyle.defaultGeoStyle);
+                            });
+                        }
+                    });
+                }
+
+                if (this.europeStateGeoJson !== '') {
+                    this.europeStateGeoJson.addTo(this.leafletMap);
+                }
+            },
+            removeAllLayers() {
+                this.europeStateGeoJson = '';
+
                 if (this.leafletMap !== null) {
                     this.leafletMap.eachLayer((layer) => {
                         if (layer instanceof L.GeoJSON) {
                             this.leafletMap.removeLayer(layer);
                         }
                     });
-                    this.leafletMap.addLayer(layer);
                 }
             }
         },
@@ -88,7 +112,8 @@
                 layers: this.layers,
                 scrollWheelZoom: false,
                 dragging: false,
-                zoomSnap: 0.1
+                zoomSnap: 0.1,
+                doubleClickZoom: false
             });
 
             this.leafletMap = map;
@@ -104,12 +129,7 @@
 
                     if (mapZoom !== 4 || !this.isCentered) {
                         this.leafletMap.setView(this.defaultMapPositionSettings.center, this.defaultMapPositionSettings.zoom);
-                        this.leafletMap.eachLayer((layer) => {
-                            if (layer instanceof L.GeoJSON) {
-                                this.leafletMap.removeLayer(layer);
-                            }
-                        });
-
+                        this.removeAllLayers();
                         this.europeGeoJson.addTo(this.leafletMap);
                         this.isCentered = true;
                     }
