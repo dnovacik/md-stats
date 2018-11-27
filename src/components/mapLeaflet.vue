@@ -13,6 +13,10 @@
         Map,
         TileLayer
     } from 'leaflet';
+
+    import europeStates from './../constants/europeStates.js';
+    import { getClassifiedStyle } from './../constants/d3helpers.js';
+
     import europeStatesJson from './../data/europe-states.geo.json';
     import geoJsonLayerStyle from './../constants/styles.js';
     import slovakiaRegionsJson from './../data/sk_regions.geo.json'
@@ -62,7 +66,7 @@
 
                                     if (this.leafletMap.hasLayer(this.europeGeoJson)) {
                                         this.removeAllLayers();
-                                        this.loadGeoJsonRegions(feature.properties.admin);
+                                        this.loadGeoJsonRegions(feature.properties.ids);
                                     }
                                 }
                             });
@@ -70,14 +74,14 @@
                     });
                 }
             },
-            loadGeoJsonRegions(stateLocale) {
-                if (stateLocale === 'Slovakia') {
+            loadGeoJsonRegions(stateId) {
+                if (stateId === europeStates.Slovakia.id) {
                     this.europeStateGeoJson = L.geoJSON(slovakiaRegionsJson, {
                         onEachFeature: (feature, layer) => {
                             layer.setStyle(geoJsonLayerStyle.defaultGeoStyle);
 
                             layer.on('mouseover', () => {
-                                layer.setStyle(geoJsonLayerStyle.hoverGeoStyle);
+                                layer.setStyle(getClassifiedStyle(feature.properties.VYMERA_ha, 0, 990000));
                             });
 
                             layer.on('mouseout', () => {
