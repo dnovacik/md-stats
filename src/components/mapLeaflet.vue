@@ -22,6 +22,7 @@
             return {
                 leafletMap: null,
                 europeGeoJson: '',
+                europeStateGeoJson: '',
                 defaultMapPositionSettings: {
                     center: [48, 19],
                     zoom: 4
@@ -30,7 +31,7 @@
                 wmsLayers: ['cr_obce', 'sk_obce', 'sk_obce_v_zas'],
                 layers: [
                     new TileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
-                        attribution: '&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> &copy; <a href=&quot;http://cartodb.com/attributions&quot;>CartoDB</a>'
+                        attribution: '&copy; <a href=&quot;http://cartodb.com/attributions&quot;>CartoDB</a>'
                     }),
                 ]
             }
@@ -57,10 +58,24 @@
                                 if (this.leafletMap !== null) {
                                     this.leafletMap.fitBounds(layer.getBounds());
                                     this.isCentered = false;
+
+                                    if (this.leafletMap.hasLayer(this.europeGeoJson)) {
+                                        this.removeAllLayersExceptClickedOne(layer, this.europeGeoJson);
+                                    }
                                 }
                             });
                         }
                     });
+                }
+            },
+            removeAllLayersExceptClickedOne(layer, layers) {
+                if (this.leafletMap !== null) {
+                    this.leafletMap.eachLayer((layer) => {
+                        if (layer instanceof L.GeoJSON) {
+                            this.leafletMap.removeLayer(layer);
+                        }
+                    });
+                    this.leafletMap.addLayer(layer);
                 }
             }
         },
@@ -72,7 +87,8 @@
                 zoom: this.defaultMapPositionSettings.zoom,
                 layers: this.layers,
                 scrollWheelZoom: false,
-                dragging: false
+                dragging: false,
+                zoomSnap: 0.1
             });
 
             this.leafletMap = map;
@@ -88,6 +104,13 @@
 
                     if (mapZoom !== 4 || !this.isCentered) {
                         this.leafletMap.setView(this.defaultMapPositionSettings.center, this.defaultMapPositionSettings.zoom);
+                        this.leafletMap.eachLayer((layer) => {
+                            if (layer instanceof L.GeoJSON) {
+                                this.leafletMap.removeLayer(layer);
+                            }
+                        });
+
+                        this.europeGeoJson.addTo(this.leafletMap);
                         this.isCentered = true;
                     }
 
