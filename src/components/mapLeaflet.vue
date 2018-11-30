@@ -16,9 +16,10 @@
 
     import europeStates from './../constants/europeStates.js';
     import { getClassifiedStyle } from './../constants/d3helpers.js';
+    import { cloneObject } from './../utils/utils.js';
+    import geoJsonLayerStyle from './../constants/styles.js';
 
     import europeStatesJson from './../data/europe-states.geo.json';
-    import geoJsonLayerStyle from './../constants/styles.js';
     import slovakiaRegionsJson from './../data/sk_regions.geo.json'
 
     export default {
@@ -26,8 +27,8 @@
         data() {
             return {
                 leafletMap: null,
-                europeGeoJson: '',
-                europeStateGeoJson: '',
+                europeGeoJson: null,
+                europeStateGeoJson: null,
                 defaultMapPositionSettings: {
                     center: [48, 19],
                     zoom: 4
@@ -45,8 +46,8 @@
             handleMapClick(event) {
                 console.log(event.latlng);
             },
-            loadGeoJson() {
-                if (this.europeGeoJson === '') {
+            loadEuropeGeoJson() {
+                if (this.europeGeoJson === null) {
                     this.europeGeoJson = L.geoJson(europeStatesJson, {
                         onEachFeature: (feature, layer) => {
                             layer.setStyle(geoJsonLayerStyle.defaultGeoStyle);
@@ -73,6 +74,9 @@
                         }
                     });
                 }
+
+                this.europeGeoJson = cloneObject(this.europeGeoJson);
+                this.europeGeoJson.addTo(this.leafletMap);
             },
             loadGeoJsonRegions(stateId) {
                 if (stateId === europeStates.Slovakia.id) {
@@ -91,12 +95,12 @@
                     });
                 }
 
-                if (this.europeStateGeoJson !== '') {
+                if (this.europeStateGeoJson !== null) {
                     this.europeStateGeoJson.addTo(this.leafletMap);
                 }
             },
             removeAllLayers() {
-                this.europeStateGeoJson = '';
+                this.europeStateGeoJson = null;
 
                 if (this.leafletMap !== null) {
                     this.leafletMap.eachLayer((layer) => {
@@ -108,8 +112,6 @@
             }
         },
         mounted() {
-            this.loadGeoJson();
-
             let map = new Map('map', {
                 center: this.defaultMapPositionSettings.center,
                 zoom: this.defaultMapPositionSettings.zoom,
@@ -123,7 +125,7 @@
             this.leafletMap = map;
 
             this.$nextTick(() => {
-                this.europeGeoJson.addTo(this.leafletMap);
+                this.loadEuropeGeoJson();
 
                 this.leafletMap.on('click', this.handleMapClick);
                 this.leafletMap.on('contextmenu', (e) => {
@@ -134,7 +136,7 @@
                     if (mapZoom !== 4 || !this.isCentered) {
                         this.leafletMap.setView(this.defaultMapPositionSettings.center, this.defaultMapPositionSettings.zoom);
                         this.removeAllLayers();
-                        this.europeGeoJson.addTo(this.leafletMap);
+                        this.loadEuropeGeoJson();
                         this.isCentered = true;
                     }
 
