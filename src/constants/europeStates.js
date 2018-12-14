@@ -1,205 +1,205 @@
 const europeStates = {
-    Albania: {
+    1: {
         id: 1,
         name: "Albania"
     },
-    Andorra: {
+    2: {
         id: 2,
         name: "Andorra"
     },
-    Austria: {
+    3: {
         id: 3,
         name: "Austria"
     },
-    Belgium: {
+    4: {
         id: 4,
         name: "Belgium"
     },
-    BosniaHerzegovina: {
+    5: {
         id: 5,
         name: "Bosnia Herzegovina"
     },
-    Croatia: {
+    6: {
         id: 6,
         name: "Croatia"
     },
-    CzechRepublic: {
+    7: {
         id: 7,
         name: "Czech Republic"
     },
-    Denmark: {
+    8: {
         id: 8,
         name: "Denmark"
     },
-    Estonia: {
+    9: {
         id: 9,
         name: "Estonia"
     },
-    Finland: {
+    10: {
         id: 10,
         name: "Finland"
     },
-    France: {
+    11: {
         id: 11,
         name: "France"
     },
-    Germany: {
+    12: {
         id: 12,
         name: "Germany"
     },
-    GibraltarUK: {
+    13: {
         id: 13,
         name: "Gibraltar (UK)"
     },
-    Greece: {
+    14: {
         id: 14,
         name: "Greece"
     },
-    GuernseyUK: {
+    15: {
         id: 15,
         name: "Guernsey (UK)"
     },
-    Hungary: {
+    16: {
         id: 16,
         name: "Hungary"
     },
-    Ireland: {
+    17: {
         id: 17,
         name: "Ireland"
     },
-    IsleOfManUK: {
+    18: {
         id: 18,
         name: "Isle of Man (UK)"
     },
-    Italy: {
+    19: {
         id: 19,
         name: "Italy"
     },
-    JerseyUK: {
+    20: {
         id: 20,
         name: "Jersey (UK)"
     },
-    Latvia: {
+    21: {
         id: 21,
         name: "Latvia"
     },
-    Liechtenstein: {
+    22: {
         id: 22,
         name: "Liechtenstein"
     },
-    Lithuania: {
+    23: {
         id: 23,
         name: "Lithuania"
     },
-    Luxembourg: {
+    24: {
         id: 24,
         name: "Luxembourg"
     },
-    Macedonia: {
+    25: {
         id: 25,
         name: "Macedonia"
     },
-    Malta: {
+    26: {
         id: 26,
         name: "Malta"
     },
-    Monaco: {
+    27: {
         id: 27,
         name: "Monaco"
     },
-    Montenegro: {
+    28: {
         id: 28,
         name: "Montenegro"
     },
-    Netherlands: {
+    29: {
         id: 29,
         name: "Netherlands"
     },
-    Norway: {
+    30: {
         id: 30,
         name: "Norway"
     },
-    Poland: {
+    31: {
         id: 31,
         name: "Poland"
     },
-    Portugal: {
+    32: {
         id: 32,
         name: "Portugal"
     },
-    SanMarino: {
+    33: {
         id: 33,
         name: "San Marino"
     },
-    Serbia: {
+    34: {
         id: 34,
         name: "Serbia"
     },
-    Slovakia: {
+    35: {
         id: 35,
         name: "Slovakia"
     },
-    Slovenia: {
+    36: {
         id: 36,
         name: "Slovenia"
     },
-    Spain: {
+    37: {
         id: 37,
         name: "Spain"
     },
-    Sweden: {
+    38: {
         id: 38,
         name: "Sweden"
     },
-    Switzerland: {
+    39: {
         id: 39,
         name: "Switzerland"
     },
-    UnitedKingdom: {
+    40: {
         id: 40,
         name: "United Kingdom"
     },
-    Armenia: {
+    41: {
         id: 41,
         name: "Armenia"
     },
-    Azerbaijan: {
+    42: {
         id: 42,
         name: "Azerbaijan"
     },
-    Belarus: {
+    43: {
         id: 43,
         name: "Belarus"
     },
-    Bulgaria: {
+    44: {
         id: 44,
         name: "Bulgaria"
     },
-    FaeroeIslandsDK: {
+    45: {
         id: 45,
         name: "Faeroe Islands (Denmark)"
     },
-    Georgia: {
+    46: {
         id: 46,
         name: "Georgia"
     },
-    Iceland: {
+    47: {
         id: 47,
         name: "Iceland"
     },
-    JanMayenNO: {
+    48: {
         id: 48,
         name: "Jan Mayen (Norway)"
     },
-    Moldova: {
+    49: {
         id: 49,
         name: "Moldova"
     },
-    Romania: {
+    50: {
         id: 50,
         name: "Romania"
     },
-    SvalbardNO: {
+    51: {
         id: 51,
         name: "Svalbard (Norway)"
     },
